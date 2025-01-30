@@ -1,3 +1,5 @@
+"bu kod yalnızca izinli testler ve beyaz şapka (ethical hacking) güvenlik analizleri için kullanılmalıdır"
+
 from flask import Flask, request, jsonify
 
 app = Flask(__name__)
