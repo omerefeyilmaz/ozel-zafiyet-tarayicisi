@@ -95,3 +95,7 @@ json
     "port_araligi": "80-443"
 }
 Sonuçları Görüntüleyin: API isteği başarılı bir şekilde tamamlandığında, JSON formatında tarama sonucu ve olası zafiyet bilgileri size geri dönecektir.
+
+
+
+2320191069-ÖMER EFE YILMAZ
