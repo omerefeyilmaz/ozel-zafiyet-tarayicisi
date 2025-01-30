@@ -1,0 +1,64 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Tarama fonksiyonu
+def tarama_yap(hedef_ip, port_araligi, zafiyet_veritabani="CVE", ozelleştirilmis_modul=False, detay_seviyesi="orta"):
+    # Bu örnekte sadece statik bir veri döneceğiz
+    # Gerçek bir tarama gerçekleştirmek için uygun kütüphaneler ve zafiyet veritabanı entegrasyonu gerekir
+    sonuc = {
+        "taramalanan_ip": hedef_ip,
+        "portlar": [
+            {"port": 80, "durum": "açık"},
+            {"port": 443, "durum": "kapalı"}
+        ],
+        "zafiyetler": [
+            {
+                "zafiyet_kodu": "CVE-2021-1234",
+                "zafiyet_adı": "Örnek Zafiyet",
+                "risk_seviyesi": "yüksek",
+                "açıklama": "Bu zafiyet, uzaktan kod çalıştırma tehlikesi yaratmaktadır."
+            }
+        ]
+    }
+    return sonuc
+
+# API endpoint
+@app.route('/tarama', methods=['POST'])
+def tarama():
+    # Kullanıcıdan gelen veriyi al
+    data = request.get_json()
+
+    try:
+        # Zorunlu parametreler
+        hedef_ip = data['hedef_ip']
+        port_araligi = data['port_araligi']
+        
+        # Opsiyonel parametreler
+        zafiyet_veritabani = data.get('zafiyet_veritabani', 'CVE')
+        ozelleştirilmis_modul = data.get('ozelleştirilmis_modul', False)
+        detay_seviyesi = data.get('detay_seviyesi', 'orta')
+
+        # Tarama işlemini başlat
+        tarama_sonucu = tarama_yap(hedef_ip, port_araligi, zafiyet_veritabani, ozelleştirilmis_modul, detay_seviyesi)
+
+        # Başarı durumunda sonucu döndür
+        return jsonify({
+            "sonuç": {
+                "durum": "başarılı",
+                "veri": tarama_sonucu,
+                "hata_mesajı": ""
+            }
+        })
+    except Exception as e:
+        # Hata durumunda hata mesajını döndür
+        return jsonify({
+            "sonuç": {
+                "durum": "başarısız",
+                "veri": {},
+                "hata_mesajı": str(e)
+            }
+        })
+
+if __name__ == '__main__':
+    app.run(debug=True)
