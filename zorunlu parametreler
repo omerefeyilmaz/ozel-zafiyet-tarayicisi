@@ -1,0 +1,27 @@
+{
+    "sonuç": {
+        "durum": "başarılı",
+        "hata_mesajı": "",
+        "veri": {
+            "portlar": [
+                {
+                    "durum": "açık",
+                    "port": 80
+                },
+                {
+                    "durum": "kapalı",
+                    "port": 443
+                }
+            ],
+            "taramalanan_ip": "192.168.1.100",
+            "zafiyetler": [
+                {
+                    "açıklama": "Bu zafiyet, uzaktan kod çalıştırma tehlikesi yaratmaktadır.",
+                    "risk_seviyesi": "yüksek",
+                    "zafiyet_adı": "Örnek Zafiyet",
+                    "zafiyet_kodu": "CVE-2021-1234"
+                }
+            ]
+        }
+    }
+}
